@@ -1,7 +1,7 @@
 ## 💻 Sobre o projeto
 
 Voll.med é uma clínica médica fictícia que precisa de um aplicativo para gestão de consultas. Desenvolvido durante o 
-oprograma ONE, na formação Spring Boot 3, o aplicativo deve possuir funcionalidades que permitam o cadastro de médicos 
+programa ONE (Oracle Next Education), na formação Spring Boot 3, o aplicativo deve possuir funcionalidades que permitam o cadastro de médicos 
 e de 
 pacientes, e também o 
 agendamento e cancelamento de consultas.
