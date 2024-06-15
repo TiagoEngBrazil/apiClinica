@@ -1,6 +1,5 @@
 package med.voll.api.domain.medico;
 
-import jakarta.persistence.EntityManager;
 import med.voll.api.domain.consulta.Consulta;
 import med.voll.api.domain.endereco.DadosEndereco;
 import med.voll.api.domain.paciente.DadosCadastroPaciente;
@@ -36,8 +35,10 @@ class MedicoRepositoryTest {
     @DisplayName("Deveria devolver nulo quando único médico não está disponível na data")
     void escolherMedicoAleatorioLivreNaDataCenario1() {
 
+        // given or arrange
         var proximaSegundaAS10 = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY)).atTime(10,
                 0);
+
 
         var medico = cadastrarMedico("Medico", "medico@vollmed.com", "123456", Especialidade.CARDIOLOGIA);
 
@@ -48,10 +49,31 @@ class MedicoRepositoryTest {
                 proximaSegundaAS10);
 
 
+        // when or act
         var medicoLivre = medicoRepository.escolherMedicoAleatorioLivreNaData(Especialidade.CARDIOLOGIA,
                 proximaSegundaAS10);
 
+        //then or assert
         assertThat(medicoLivre).isNull();
+    }
+
+    @Test
+    @DisplayName("Deveria devolver médico quando este estiver disponível na data")
+    void escolherMedicoAleatorioLivreNaDataCenario2() {
+
+        // given or arrange
+        var proximaSegundaAS10 = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY)).atTime(10,
+                0);
+
+        var medico = cadastrarMedico("Medico", "medico@vollmed.com", "123456", Especialidade.CARDIOLOGIA);
+
+
+        // when or act
+        var medicoLivre = medicoRepository.escolherMedicoAleatorioLivreNaData(Especialidade.CARDIOLOGIA,
+                proximaSegundaAS10);
+
+        //then or assert
+        assertThat(medicoLivre).isEqualTo(medico);
     }
 
     private void cadastrarConsulta(Medico medico, Paciente paciente, LocalDateTime data) {
@@ -101,21 +123,5 @@ class MedicoRepositoryTest {
                 null,
                 null
         );
-    }
-
-    @Test
-    @DisplayName("Deveria devolver médico quando este estiver disponível na data")
-    void escolherMedicoAleatorioLivreNaDataCenario2() {
-
-        var proximaSegundaAS10 = LocalDate.now().with(TemporalAdjusters.next(DayOfWeek.MONDAY)).atTime(10,
-                0);
-
-        var medico = cadastrarMedico("Medico", "medico@vollmed.com", "123456", Especialidade.CARDIOLOGIA);
-
-
-        var medicoLivre = medicoRepository.escolherMedicoAleatorioLivreNaData(Especialidade.CARDIOLOGIA,
-                proximaSegundaAS10);
-
-        assertThat(medicoLivre).isEqualTo(medico);
     }
 }
