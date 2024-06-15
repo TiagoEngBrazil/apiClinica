@@ -33,9 +33,9 @@ public class Medico {
     private Boolean ativo;
 
     public Medico(DadosCadastroMedico dados) {
-        this.ativo = true;
         this.nome = dados.nome();
         this.email = dados.email();
+        this.ativo = true;
         this.telefone = dados.telefone();
         this.crm = dados.crm();
         this.especialidade = dados.especialidade();
