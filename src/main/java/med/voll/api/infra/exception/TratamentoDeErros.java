@@ -2,7 +2,6 @@ package med.voll.api.infra.exception;
 
 
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.ValidationException;
 import med.voll.api.domain.ValidacaoException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
